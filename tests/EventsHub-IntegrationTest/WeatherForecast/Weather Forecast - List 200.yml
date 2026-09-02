@@ -5,8 +5,30 @@ info:
 
 http:
   method: GET
-  url: https://localhost:5001/api/V1/weatherforecast
+  url: https://localhost:5001/api/v1/weatherforecast
   auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status code is 200 OK", function(){
+          expect(res.getStatus()).to.equal.(200);
+        });
+
+        test("Response returns an array", function(){
+          
+         const body = res.getBody();
+          expect(body).to.be.an("array");
+          expect(body.length).to.equal(5);
+        });
+
+        test("Response returns a valid forecast", function(){
+          
+         const forecast = res.getBody()[0];
+          expect(body).to.be.an("array");
+          expect(body.length).to.equal(5);
+        });
 
 settings:
   encodeUrl: true
