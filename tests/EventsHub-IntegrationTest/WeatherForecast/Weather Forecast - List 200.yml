@@ -1,0 +1,15 @@
+info:
+  name: Weather Forecast - List 200
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: https://localhost:5001/api/V1/weatherforecast
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
