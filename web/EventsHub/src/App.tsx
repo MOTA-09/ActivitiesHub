@@ -7,7 +7,6 @@ function App() {
     <h3>
       Events Hub
     </h3>
-      
   )
 }
 
