@@ -18,7 +18,7 @@ function App() {
     <div>
       <h3 style={{color: "red"}}>Events Hub</h3>
       <ul>
-        {activities.map((activity) => (
+        {activities.map((activity: Activity) => (
           <li key={activity.id}>{activity.title}</li>
         ))}
       </ul>
