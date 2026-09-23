@@ -8,8 +8,11 @@ http:
   url: "{{baseUrl}}/events/:eventid"
   params:
     - name: eventid
-      value: "67"
+      value: 42fb053e-d5d5-4ab2-a11c-2c6a47ffdba8
       type: path
+  body:
+    type: json
+    data: ""
   auth: inherit
 
 runtime:
@@ -17,7 +20,7 @@ runtime:
     - type: tests
       code: |-
         test("Status code is 200 OK", function(){
-          expect(res.getStatus()).to.equal.(200);
+          expect(res.getStatus()).to.equal(200);
         });
 
 settings:
@@ -25,3 +28,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

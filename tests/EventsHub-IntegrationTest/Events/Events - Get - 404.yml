@@ -5,11 +5,22 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/events/:eventid"
-  params:
-    - name: eventid
-      value: none-existing-evenid
-      type: path
+  url: "{{baseUrl}}/events"
+  body:
+    type: json
+    data: |-
+      {
+        "id": {{$guid}},
+        "title": "Future Event 3",
+        "date": "2027-01-21T07:38:32.3120801",
+        "description": "Event 4 months in future",
+        "category": "music",
+        "isCancelled": false,
+        "city": "Ciudad de México",
+        "venue": "Basílica de Guadalupe",
+        "latitude": "19.4847",
+        "longitude": "-99.1176"
+      }
   auth: inherit
 
 runtime:
@@ -17,7 +28,7 @@ runtime:
     - type: tests
       code: |-
         test("Status code is 404 Not Found", function(){
-          expect(res.getStatus()).to.equal.(404);
+          expect(res.getStatus()).to.equal(404);
         });
 
         test("Response returns an array", function(){
@@ -31,3 +42,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true
