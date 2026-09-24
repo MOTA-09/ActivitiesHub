@@ -8,7 +8,7 @@ http:
   url: "{{baseUrl}}/events/:eventid"
   params:
     - name: eventid
-      value: 42fb053e-d5d5-4ab2-a11c-2c6a47ffdba8
+      value: 022a7251-b5e0-453b-9a2f-95c4e1ad6d36
       type: path
   body:
     type: json

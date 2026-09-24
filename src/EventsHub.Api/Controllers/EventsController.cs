@@ -23,10 +23,21 @@ public class EventsController : EventsHubBaseController
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(Event), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(Event), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<string>> CreateEventAsync(Event @event)
     {
         return await Mediator.Send(new CreateEvents.Command { Event = @event });
+    }
+
+
+    [HttpPut]
+    [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> EditEventAsync(Event @event)
+    {
+        await Mediator.Send(new EditEvent.Command { Event = @event });
+        return NoContent();
     }
 }
