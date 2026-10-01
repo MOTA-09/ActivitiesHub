@@ -5,6 +5,10 @@ actually part of the runtime request path (see
 [`docs/Architecture.md`](../../docs/Architecture.md) for how it fits with
 the rest of the system).
 
+## Connections
+
+The browser frontend calls this API over HTTP. At startup, the API configures Persistence, migrates and seeds SQLite, then controllers query `AppDbContext` directly and return Domain `Event` objects as JSON. `EventsHub.OpenApi` loads the API controllers in a separate process only for document and client generation. See the [architecture overview](../../docs/Architecture.md#request-walkthrough).
+
 ## What it does
 
 - Serves `Event` data over HTTP, read-only, from a SQLite database.

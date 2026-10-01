@@ -4,6 +4,10 @@
 files — only its `.csproj`, which references `EventsHub.Domain` and
 `EventsHub.Persistence`.
 
+## Connections
+
+The project references Domain and Persistence, and Api references Application. Project references therefore make those assemblies available to Api transitively. There are no application services or use cases here today, so API controllers access `AppDbContext` directly.
+
 ## Why it exists
 
 `EventsHub.Api` references only `EventsHub.Application` (not `Domain` or

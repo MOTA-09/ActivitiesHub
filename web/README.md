@@ -6,6 +6,10 @@ connected to it via HTTP at runtime. See
 [`../docs/Architecture.md`](../docs/Architecture.md) for how the two fit
 together.
 
+## Connections
+
+The frontend is a separate app from the .NET backend. At runtime it uses Axios to request event JSON from `EventsHub.Api` at `https://localhost:5001/api/v1/events`; the backend allows the Vite development origin through CORS. The API's `Event` payload is represented by the frontend's ambient `Activity` type. See the [architecture overview](../docs/Architecture.md#request-walkthrough).
+
 ## Stack
 
 Vite 8 + React 19 + TypeScript, MUI 9 (`@mui/material`, `@mui/icons-material`,

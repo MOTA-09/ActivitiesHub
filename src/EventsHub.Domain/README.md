@@ -3,6 +3,10 @@
 The innermost layer: plain entity classes, no framework dependencies (no EF
 Core, no ASP.NET references — just the `net10.0` BCL).
 
+## Connections
+
+`Event` is the shared model used by Persistence for EF Core storage and by Api as the JSON response shape. The frontend has its own TypeScript `Activity` type matching that payload. There is no separate DTO or mapping layer today. See the [architecture overview](../../docs/Architecture.md#request-walkthrough).
+
 ## Contents
 
 - `Event.cs` — the one entity in the system. String `Id` (client-generated

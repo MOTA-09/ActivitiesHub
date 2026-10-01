@@ -5,6 +5,10 @@ document for `EventsHub.Api` and drive NSwag's typed-client codegen from it.
 **It is not part of the running application** — it never serves real
 traffic and isn't started alongside `EventsHub.Api`.
 
+## Connections
+
+This host uses the Api assembly to describe the HTTP contract, then NSwag generates the checked-in OpenAPI document and typed C# client. The generated client is not the web frontend's runtime connection: the React app currently calls the API directly with Axios. See the [architecture overview](../../docs/Architecture.md#system-overview).
+
 ## How it works
 
 `Program.cs` loads `EventsHub.Api`'s assembly as an MVC "application part"

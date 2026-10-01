@@ -3,6 +3,10 @@
 The data-access layer: EF Core `DbContext`, migrations, and seed data.
 Depends only on `EventsHub.Domain`.
 
+## Connections
+
+Persistence references Domain for the `Event` entity. Api configures this project with the SQLite connection, applies its migrations, and seeds an empty database during startup. Controllers currently inject `AppDbContext` directly; the Application project does not mediate database access. See the [architecture overview](../../docs/Architecture.md#architectural-pattern).
+
 ## Contents
 
 - **`AppDbContext.cs`** — `DbSet<Event> Events`. Configured for SQLite
