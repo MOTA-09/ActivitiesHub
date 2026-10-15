@@ -49,6 +49,12 @@ const handleSubmitForm = (activity: Activity) => {
   setEditMode(false);
 }
 
+const handleDeleteActivity = (id: string) =>{
+  setActivities(activities.filter(act => act.id !== id));
+  setSelectedActivity(undefined);
+}
+
+
 
   return (
     <Box sx={{bgcolor: "#f9e8ff" }}>
@@ -63,7 +69,8 @@ const handleSubmitForm = (activity: Activity) => {
           editMode={editMode}
           openForm={handleOpenForm}
           closeForm={handleFormClose} 
-          submitForm={handleSubmitForm} />
+          submitForm={handleSubmitForm} 
+          deleteActivity={handleDeleteActivity} />
       </Container>
     </Box>
   )
