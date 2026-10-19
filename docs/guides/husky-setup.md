@@ -107,7 +107,7 @@ Add a `lint-staged` section to `web/package.json`. Only list tools that are **in
 
 ```json
 "lint-staged": {
-  "*.{js,jsx,ts,tsx}": "eslint --fix"
+  "*.{js,jsx,ts,tsx}": "node ./node_modules/eslint/bin/eslint.js --fix"
 }
 ```
 
@@ -135,10 +135,14 @@ Add a `lint-staged` section to `web/package.json`. Only list tools that are **in
 4. Replace the `lint-staged` section in `web/package.json` with this version. ESLint runs first, then Prettier:
    ```json
    "lint-staged": {
-     "*.{ts,tsx}": ["eslint --fix --max-warnings=0", "prettier --write"],
-     "*.{json,md,css}": "prettier --write"
+     "*.{ts,tsx}": [
+       "node ./node_modules/eslint/bin/eslint.js --fix --max-warnings=0",
+       "node ./node_modules/prettier/bin/prettier.cjs --write"
+     ],
+     "*.{json,md,css}": "node ./node_modules/prettier/bin/prettier.cjs --write"
    }
    ```
+   Calling the package entry points with `node` avoids relying on Windows `.cmd` shims.
 5. (Optional) Format the existing code once, in its **own commit**, so it doesn't mix with the Husky setup. Hooks are skipped for this one commit because it only reformats files. (Run from the folder you are in; `git add .` stages only that folder.)
    ```powershell
    npx prettier --write .
@@ -318,6 +322,7 @@ Remove-Item Env:HUSKY                # turn it back on
 | `core.hooksPath` ends in `/_` | npm Husky overwrote it. Remove `"prepare": "husky"` from `web/package.json` and re-run `dotnet husky install` |
 | `dotnet husky` not found | From the repo root run `dotnet tool restore` |
 | The web task fails with `'prettier' is not recognized` (or another tool) | `lint-staged` runs the commands listed in `web/package.json`: remove the rule, or install the tool with `npm install --save-dev prettier` inside `web/` |
+| `lint-staged` reports `Task failed to spawn: prettier --write` on Windows | Run tool entry points through `node` (for example, `node ./node_modules/prettier/bin/prettier.cjs --write`) instead of invoking the `.cmd` shim directly |
 | The web task fails with "command not found" | Run `npm install` inside `web/` so `lint-staged` is installed |
 | `dotnet format` task errors on file paths | Add `"pathMode": "relative"` (or `"absolute"`) to the task |
 | Hook fails with `\r` errors on Windows | Save the hook file with LF line endings, not CRLF |
