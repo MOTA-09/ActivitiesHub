@@ -1,187 +1,263 @@
-# Graph Report - ActivitiesHub  (2026-09-29)
+# Graph Report - ActivitiesHub (2026-10-19)
 
 ## Corpus Check
-- Corpus is ~47,074 words - fits in a single context window. You may not need a graph.
+
+- 102 files · ~125,499 words
+- Verdict: corpus is large enough that graph structure adds value.
+- Unclassified: 13 file(s) not represented in the graph (top: (none) 11, .nswag 1, .css 1)
 
 ## Summary
-- 382 nodes · 474 edges · 40 communities (21 shown, 19 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.82)
+
+- 460 nodes · 569 edges · 44 communities (28 shown, 16 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
+## Graph Freshness
+
+- Built from commit: `00b60a8e`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
+
 ## Community Hubs (Navigation)
-- Frontend Package Ecosystem
-- Application Request Handlers
-- Solution Dependencies
-- Application Layer Mapping
-- Events API Endpoints
-- Database Migrations
-- CQRS Persistence Handlers
-- API Controllers and Tests
-- Frontend Compiler Settings
-- Frontend Development Tools
-- TypeScript Build Settings
-- Events API Test Collections
-- Project Architecture Documentation
-- API Launch Profile
-- OpenAPI Launch Profile
-- Frontend Runtime Packages
-- Weather Forecast Model
-- Integration Test Lifecycle
-- Backend Architecture Guides
-- API Test Environments
-- Frontend Application Design
-- TypeScript Project References
-- Activity Domain Contract
-- Architecture Documentation Workflow
-- Software Testing Guide
-- Git Workflow Guide
-- Graphify and OpenSpec Setup
-- OpenAPI Client Generation
-- EventsHub Project Overview
-- Legacy API Test Configuration
-- Legacy Integration Test Collection
-- Legacy Weather Requests
-- Legacy Event Requests
-- Integration Test Collection
-- Weather Forecast Requests
-- Vite Favicon
-- Social Icon Sprite
-- Frontend Hero Artwork
-- React Logo Asset
-- Vite Logo Asset
+
+- package.json
+- Command
+- EventsHub.UnitTests.csproj
+- EventsHub.Persistence
+- .GetEventsAsync
+- AppDbContextModelSnapshot
+- @mui/material
+- EventsControllerTests.cs
+- compilerOptions
+- devDependencies
+- compilerOptions
+- Events Request Collection Folder
+- Graphify Knowledge Graph Pipeline
+- https
+- EventsHub.OpenApi
+- Part 2: .NET only (Husky.Net)
+- WeatherForecast
+- Event
+- EventsHub System Architecture
+- Local API base URL
+- EventsHub web frontend
+- tsconfig.json
+- index.d.ts
+- Architecture and README Documentation Workflow
+- Software Testing Fundamentals
+- Git in Practice Guide
+- Graphify and OpenSpec Installation Guide
+- OpenAPI Document and Typed Client Setup
+- EventsHub Project Identity
+- Local API base URL
+- EventsHub integration test collection
+- WeatherForecast request folder
+- Events request folder
+- EventsHub integration tests collection
+- WeatherForecast request folder
+- Purple Vite Lightning Favicon
+- Social Media Icon Sprite
+- IRequest
+- GlobalTestSetup
+- Handler
+- Handler
+- AppDbContext
+- Part 1: .NET + npm in the same repo (e.g. EventsHub)
+- Part 3: npm only, `package.json` in the repo root (Husky v9)
 
 ## God Nodes (most connected - your core abstractions)
+
 1. `Event` - 25 edges
 2. `compilerOptions` - 18 edges
 3. `compilerOptions` - 15 edges
-4. `AppDbContext` - 13 edges
-5. `EventsHub.Persistence` - 11 edges
-6. `EventsHub.Domain` - 9 edges
-7. `Graphify Knowledge Graph Pipeline` - 9 edges
-8. `EventsController` - 8 edges
-9. `Handler` - 8 edges
-10. `EventsHubBaseController` - 6 edges
+4. `Part 1: .NET + npm in the same repo (e.g. EventsHub)` - 14 edges
+5. `Part 2: .NET only (Husky.Net)` - 14 edges
+6. `Part 3: npm only, `package.json` in the repo root (Husky v9)` - 14 edges
+7. `Part 4: npm only, `package.json` in a subfolder (Husky v9)` - 13 edges
+8. `AppDbContext` - 13 edges
+9. `EventsHub.Persistence` - 11 edges
+10. `EventsHub.Domain` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `EventsHub API` --semantically_similar_to--> `Get Event HTTP Request`  [INFERRED] [semantically similar]
+
+- `EventsHub API` --semantically_similar_to--> `Get Event HTTP Request` [INFERRED] [semantically similar]
   src/EventsHub.Api/README.md → tests/EventsHub-IntegrationTest/Events/Events - Get - 200.yml
-- `EventsHub API` --semantically_similar_to--> `Weather Forecast HTTP Request`  [INFERRED] [semantically similar]
+- `EventsHub API` --semantically_similar_to--> `Weather Forecast HTTP Request` [INFERRED] [semantically similar]
   src/EventsHub.Api/README.md → tests/EventsHub-IntegrationTest/WeatherForecast/Weather Forecast - List 200.yml
-- `GlobalTestSetup` --references--> `AppDbContext`  [EXTRACTED]
+- `GlobalTestSetup` --references--> `AppDbContext` [EXTRACTED]
   tests/EventsHub.UnitTests/GlobalTestSetup.cs → src/EventsHub.Persistence/AppDbContext.cs
-- `Project Graphify Instructions` --references--> `Graphify Knowledge Graph Pipeline`  [EXTRACTED]
+- `Project Graphify Instructions` --references--> `Graphify Knowledge Graph Pipeline` [EXTRACTED]
   AGENTS.md → .codex/skills/graphify/SKILL.md
-- `EventsControllerTests` --references--> `EventsController`  [EXTRACTED]
+- `EventsControllerTests` --references--> `EventsController` [EXTRACTED]
   tests/EventsHub.UnitTests/Controllers/EventsControllerTests.cs → src/EventsHub.Api/Controllers/EventsController.cs
 
 ## Import Cycles
+
 - None detected.
 
-## Communities (40 total, 19 thin omitted)
+## Communities (44 total, 16 thin omitted)
 
-### Community 0 - "Frontend Package Ecosystem"
-Cohesion: 0.07
-Nodes (36): axios, @babel/core, babel-plugin-react-compiler, @emotion/react, @emotion/styled, eslint, @eslint/js, eslint-plugin-react-hooks (+28 more)
+### Community 0 - "package.json"
 
-### Community 1 - "Application Request Handlers"
-Cohesion: 0.08
-Nodes (32): ILogger, IRequest, List, Query, Command, Event, Command, Event (+24 more)
+Cohesion: 0.05
+Nodes (41): axios, @babel/core, babel-plugin-react-compiler, @emotion/react, @emotion/styled, eslint, @eslint/js, eslint-plugin-react-hooks (+33 more)
 
-### Community 2 - "Solution Dependencies"
+### Community 1 - "Command"
+
+Cohesion: 0.18
+Nodes (12): Command, IMapper, IRequestHandler, CancellationToken, Task, Handler, CancellationToken, Task (+4 more)
+
+### Community 2 - "EventsHub.UnitTests.csproj"
+
 Cohesion: 0.07
 Nodes (26): AutoMapper (13.0.1), coverlet.collector (6.0.4), MediatR (14.2.0), Microsoft.AspNetCore.Mvc.NewtonsoftJson (10.0.11), Microsoft.AspNetCore.OpenApi (10.0.11), Microsoft.EntityFrameworkCore.Design (10.0.11), Microsoft.EntityFrameworkCore.Sqlite (10.0.11), Microsoft.NET.Test.Sdk (17.14.0) (+18 more)
 
-### Community 3 - "Application Layer Mapping"
-Cohesion: 0.11
-Nodes (18): automapper, EventsHub.Domain, EventsHub.Application.Events.Queries, EventsHub.UnitTests, EventsHub.Persistence, EventsHub.Application.Events.Comands, EventsHub.Application.Core, mediatr (+10 more)
+### Community 3 - "EventsHub.Persistence"
 
-### Community 4 - "Events API Endpoints"
-Cohesion: 0.16
-Nodes (15): ActionResult, HttpDelete, HttpPost, HttpPut, IReadOnlyList, NotFoundObjectResult, ProducesResponseType, SetUp (+7 more)
+Cohesion: 0.09
+Nodes (23): automapper, EventsHub.Domain, EventsHub.Persistence.Migrations, EventsHub.Application.Events.Queries, EventsHub.UnitTests, EventsHub.Persistence, EventsHub.Application.Events.Comands, EventsHub.Application.Core (+15 more)
 
-### Community 5 - "Database Migrations"
+### Community 4 - ".GetEventsAsync"
+
 Cohesion: 0.12
-Nodes (15): EventsHub.Persistence.Migrations, microsoft_entityframeworkcore_infrastructure, microsoft_entityframeworkcore_migrations, microsoft_entityframeworkcore_storage_valueconversion, Migration, MigrationBuilder, ModelSnapshot, DateTime (+7 more)
+Nodes (19): ActionResult, ControllerBase, HttpDelete, HttpPost, HttpPut, IMediator, IReadOnlyList, NotFoundObjectResult (+11 more)
 
-### Community 6 - "CQRS Persistence Handlers"
+### Community 5 - "AppDbContextModelSnapshot"
+
+Cohesion: 0.40
+Nodes (4): ModelSnapshot, DateTime, ModelBuilder, AppDbContextModelSnapshot
+
+### Community 6 - "@mui/material"
+
 Cohesion: 0.14
-Nodes (17): Command, DbContext, DbContextOptions, DbSet, IMapper, IRequestHandler, CancellationToken, Task (+9 more)
+Nodes (17): @mui/icons-material, @mui/material, react, App(), NavBar(), Props, web_src_app_layout_styles, ActivityCard() (+9 more)
 
-### Community 7 - "API Controllers and Tests"
-Cohesion: 0.12
-Nodes (14): ControllerBase, EventsHub.Api.Controllers, EventsHub.UnitTests.Controllers, IEnumerable, IMediator, microsoft_aspnetcore_mvc, newtonsoft_json_serialization, EventsHubBaseController (+6 more)
+### Community 7 - "EventsControllerTests.cs"
 
-### Community 8 - "Frontend Compiler Settings"
+Cohesion: 0.15
+Nodes (10): EventsHub.Api.Controllers, EventsHub.UnitTests.Controllers, IEnumerable, microsoft_aspnetcore_mvc, newtonsoft_json_serialization, HttpGet, WeatherForecastController, system_reflection (+2 more)
+
+### Community 8 - "compilerOptions"
+
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowArbitraryExtensions, allowImportingTsExtensions, erasableSyntaxOnly, jsx, lib, module, moduleDetection (+11 more)
 
-### Community 9 - "Frontend Development Tools"
+### Community 9 - "devDependencies"
+
 Cohesion: 0.11
 Nodes (18): devDependencies, @babel/core, babel-plugin-react-compiler, eslint, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals (+10 more)
 
-### Community 10 - "TypeScript Build Settings"
+### Community 10 - "compilerOptions"
+
 Cohesion: 0.12
 Nodes (16): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, noEmit, noFallthroughCasesInSwitch (+8 more)
 
-### Community 11 - "Events API Test Collections"
+### Community 11 - "Events Request Collection Folder"
+
 Cohesion: 0.18
 Nodes (13): EventsHub API, EventsHub.Application Placeholder, EventsHub Domain and Event Entity, EventsHub OpenAPI Host and Client Generation, EventsHub Persistence Layer, Create Event HTTP Request, Delete Event HTTP Request, Edit Event HTTP Request (+5 more)
 
-### Community 12 - "Project Architecture Documentation"
+### Community 12 - "Graphify Knowledge Graph Pipeline"
+
 Cohesion: 0.20
 Nodes (10): Project Graphify Instructions, Graphify Knowledge Graph Pipeline, URL Ingestion and Folder Watching, Graph Exports and Token Benchmark, Semantic Extraction Schema, GitHub Clone and Cross-Repository Merge, Commit Hook and CLAUDE.md Integration, Graph Query, Path, and Explain Operations (+2 more)
 
-### Community 13 - "API Launch Profile"
+### Community 13 - "https"
+
 Cohesion: 0.20
 Nodes (9): ASPNETCORE_ENVIRONMENT, applicationUrl, commandName, dotnetRunMessages, environmentVariables, launchBrowser, profiles, https (+1 more)
 
-### Community 14 - "OpenAPI Launch Profile"
+### Community 14 - "EventsHub.OpenApi"
+
 Cohesion: 0.22
 Nodes (8): ASPNETCORE_ENVIRONMENT, applicationUrl, commandName, environmentVariables, launchBrowser, profiles, EventsHub.OpenApi, $schema
 
-### Community 15 - "Frontend Runtime Packages"
-Cohesion: 0.22
-Nodes (9): dependencies, axios, @emotion/react, @emotion/styled, @fontsource/roboto, @mui/icons-material, @mui/material, react (+1 more)
+### Community 15 - "Part 2: .NET only (Husky.Net)"
 
-### Community 16 - "Weather Forecast Model"
+Cohesion: 0.06
+Nodes (31): How to use this guide, Installing Husky in a Project: .NET and npm, Optional: add Prettier (code formatting), Part 2: .NET only (Husky.Net), Part 4: npm only, `package.json` in a subfolder (Husky v9), Skipping hooks (use sparingly), Skipping hooks (use sparingly), Step 10: Commit the Husky files (+23 more)
+
+### Community 16 - "WeatherForecast"
+
 Cohesion: 0.25
 Nodes (7): EventsHub.Api, DateOnly, WeatherForecast, Date, Summary, TemperatureC, TemperatureF
 
-### Community 17 - "Integration Test Lifecycle"
-Cohesion: 0.33
-Nodes (5): OneTimeSetUp, OneTimeTearDown, Task, GlobalTestSetup, AppDbContext
+### Community 17 - "Event"
 
-### Community 18 - "Backend Architecture Guides"
+Cohesion: 0.15
+Nodes (12): DateTime, Event, Category, City, Date, Description, Id, IsCancelled (+4 more)
+
+### Community 18 - "EventsHub System Architecture"
+
 Cohesion: 0.70
 Nodes (5): EventsHub Developer Guide, EventsHub System Architecture, Clean Architecture Fundamentals, CQRS Fundamentals, Entity Framework Core DbContext Fundamentals
 
-### Community 19 - "API Test Environments"
+### Community 19 - "Local API base URL"
+
 Cohesion: 0.40
 Nodes (5): Local API base URL, Get event success request, Get event not found request, List events request, List weather forecast request
 
-### Community 20 - "Frontend Application Design"
+### Community 20 - "EventsHub web frontend"
+
 Cohesion: 0.40
 Nodes (5): Events Hub HTML entry document, EventsHub frontend and backend architecture, EventsHub web frontend, Frontend HTTP API connection, Vite React TypeScript stack
 
+### Community 37 - "IRequest"
+
+Cohesion: 0.20
+Nodes (10): IRequest, Command, Event, CreateEvents, Command, Id, DeleteEvent, Command (+2 more)
+
+### Community 38 - "GlobalTestSetup"
+
+Cohesion: 0.22
+Nodes (7): OneTimeSetUp, OneTimeTearDown, Task, DbInitializer, Task, GlobalTestSetup, AppDbContext
+
+### Community 39 - "Handler"
+
+Cohesion: 0.32
+Nodes (7): ILogger, List, CancellationToken, Task, GetEventList, Handler, Query
+
+### Community 40 - "Handler"
+
+Cohesion: 0.29
+Nodes (7): Query, CancellationToken, Task, GetEventDetails, Handler, Query, Id
+
+### Community 41 - "AppDbContext"
+
+Cohesion: 0.40
+Nodes (5): DbContext, DbContextOptions, DbSet, AppDbContext, Events
+
+### Community 42 - "Part 1: .NET + npm in the same repo (e.g. EventsHub)"
+
+Cohesion: 0.13
+Nodes (15): Optional: add Prettier (code formatting), Part 1: .NET + npm in the same repo (e.g. EventsHub), Skipping hooks (use sparingly), Step 10: Commit the Husky files, Step 11: Setup for a new teammate or CI, Step 1: Check prerequisites, Step 2: Install Husky.Net as a local tool, Step 3: Install the Git hooks (+7 more)
+
+### Community 43 - "Part 3: npm only, `package.json` in the repo root (Husky v9)"
+
+Cohesion: 0.13
+Nodes (15): Optional: add Prettier (code formatting), Part 3: npm only, `package.json` in the repo root (Husky v9), Skipping hooks (use sparingly), Step 10: Commit the Husky files, Step 11: Setup for a new teammate or CI, Step 1: Check prerequisites, Step 2: Make sure `package.json` and `.gitignore` exist, Step 3: Install Husky (+7 more)
+
 ## Knowledge Gaps
-- **181 isolated node(s):** `Mediator`, `net10.0`, `Microsoft.AspNetCore.OpenApi (10.0.11)`, `Microsoft.EntityFrameworkCore.Design (10.0.11)`, `Microsoft.NET.Sdk.Web` (+176 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 227 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **19 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+
+- **236 isolated node(s):** `How to use this guide`, `Where to run the commands (read this once)`, `Step 1: Check prerequisites`, `Step 2: Install Husky.Net as a local tool`, `Step 3: Install the Git hooks` (+231 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 283 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
+
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Event` connect `Application Request Handlers` to `Application Layer Mapping`, `Events API Endpoints`, `CQRS Persistence Handlers`?**
-  _High betweenness centrality (0.062) - this node is a cross-community bridge._
-- **Why does `AppDbContext` connect `CQRS Persistence Handlers` to `Application Request Handlers`, `Application Layer Mapping`, `Integration Test Lifecycle`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
-- **Why does `EventsHub.Persistence` connect `Application Layer Mapping` to `Database Migrations`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **What connects `Mediator`, `net10.0`, `Microsoft.AspNetCore.OpenApi (10.0.11)` to the rest of the system?**
-  _181 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Frontend Package Ecosystem` be split into smaller, more focused modules?**
-  _Cohesion score 0.06585365853658537 - nodes in this community are weakly interconnected._
-- **Should `Application Request Handlers` be split into smaller, more focused modules?**
-  _Cohesion score 0.08021390374331551 - nodes in this community are weakly interconnected._
-- **Should `Solution Dependencies` be split into smaller, more focused modules?**
+- **Why does `Event` connect `Event` to `.GetEventsAsync`, `IRequest`, `Handler`, `Handler`, `AppDbContext`?**
+  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+- **Why does `AppDbContext` connect `AppDbContext` to `Command`, `EventsHub.Persistence`, `GlobalTestSetup`, `Handler`, `Handler`, `Event`?**
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+- **What connects `How to use this guide`, `Where to run the commands (read this once)`, `Step 1: Check prerequisites` to the rest of the system?**
+  _236 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `package.json` be split into smaller, more focused modules?**
+  _Cohesion score 0.05353535353535353 - nodes in this community are weakly interconnected._
+- **Should `EventsHub.UnitTests.csproj` be split into smaller, more focused modules?**
   _Cohesion score 0.07386363636363637 - nodes in this community are weakly interconnected._
+- **Should `EventsHub.Persistence` be split into smaller, more focused modules?**
+  _Cohesion score 0.08846153846153847 - nodes in this community are weakly interconnected._
+- **Should `.GetEventsAsync` be split into smaller, more focused modules?**
+  _Cohesion score 0.12433862433862433 - nodes in this community are weakly interconnected._

@@ -43,7 +43,7 @@ This is an early-stage app — worth knowing before extending it:
   `import.meta.env` base-URL config yet — if you add more API calls or need
   this to work against a non-`localhost:5001` backend, that's the first gap
   to close.
-- **`src/lib/types/index.d.ts`** declares shared types as *ambient* `type`
+- **`src/lib/types/index.d.ts`** declares shared types as _ambient_ `type`
   declarations (e.g. `Activity`, which mirrors the backend's `Event`
   entity/DTO — the frontend hasn't been renamed to match yet). Being a
   `.d.ts` ambient declaration file, these types are globally available with

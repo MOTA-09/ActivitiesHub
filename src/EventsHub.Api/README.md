@@ -32,11 +32,11 @@ All routes are versioned under `api/v1/` via the shared
 `[ApiController]`) — new controllers should derive from it rather than
 declaring their own route.
 
-| Method | Route | Description |
-|---|---|---|
-| GET | `/api/v1/Events` | List all events |
-| GET | `/api/v1/Events/{id}` | Get one event by id; `404` with a plain-string body if not found |
-| GET | `/api/v1/WeatherForecast` | Unmodified ASP.NET template sample endpoint, re-parented onto the same base controller |
+| Method | Route                     | Description                                                                            |
+| ------ | ------------------------- | -------------------------------------------------------------------------------------- |
+| GET    | `/api/v1/Events`          | List all events                                                                        |
+| GET    | `/api/v1/Events/{id}`     | Get one event by id; `404` with a plain-string body if not found                       |
+| GET    | `/api/v1/WeatherForecast` | Unmodified ASP.NET template sample endpoint, re-parented onto the same base controller |
 
 ## Running it
 

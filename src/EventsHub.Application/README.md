@@ -12,7 +12,7 @@ The project references Domain and Persistence, and Api references Application. P
 
 `EventsHub.Api` references only `EventsHub.Application` (not `Domain` or
 `Persistence` directly). Since .NET project references are transitive, `Api`
-reaches `Persistence`/`Domain` *through* this project. It's a structural
+reaches `Persistence`/`Domain` _through_ this project. It's a structural
 stand-in for an application/service layer that the Clean-Architecture-shaped
 solution layout implies should exist, but doesn't yet — controllers in
 `EventsHub.Api` currently call `AppDbContext` from `EventsHub.Persistence`

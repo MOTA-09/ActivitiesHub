@@ -1,76 +1,79 @@
-import {Box, Container, CssBaseline} from '@mui/material';
-import './styles.css';
-import axios from 'axios';
-import {useEffect, useState} from 'react'
-import NavBar from './NavBar';
-import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
+import { Box, Container, CssBaseline } from '@mui/material'
+import './styles.css'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import NavBar from './NavBar'
+import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard'
 
 function App() {
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
-  const [editMode, setEditMode] = useState(false);
+  const [activities, setActivities] = useState<Activity[]>([])
+  const [selectedActivity, setSelectedActivity] = useState<
+    Activity | undefined
+  >(undefined)
+  const [editMode, setEditMode] = useState(false)
 
   useEffect(() => {
-    axios.get<Activity[]>('https://localhost:5001/api/V1/events')
-      .then(response => setActivities(response.data));
+    axios
+      .get<Activity[]>('https://localhost:5001/api/V1/events')
+      .then((response) => setActivities(response.data))
 
-      return () => {};
-  }, []);
+    return () => {}
+  }, [])
 
   const handleSelectActivity = (id: string) => {
-    setSelectedActivity(activities.find(act => act.id === id));
+    setSelectedActivity(activities.find((act) => act.id === id))
   }
 
   const handleCancelSelectActivity = () => {
-    setSelectedActivity(undefined);
+    setSelectedActivity(undefined)
   }
 
-const handleOpenForm = (id?: string) => {
-  if (id) 
-    handleSelectActivity(id);
-  else 
-    handleCancelSelectActivity();
-  setEditMode(true);
-}
-
-const handleFormClose = () => {
-  setEditMode(false);
-}
-
-const handleSubmitForm = (activity: Activity) => {
-  if (activity.id) {
-    setActivities(activities.map(act => act.id === activity.id ? activity : act))
+  const handleOpenForm = (id?: string) => {
+    if (id) handleSelectActivity(id)
+    else handleCancelSelectActivity()
+    setEditMode(true)
   }
-  else {
-    const newActivity = { ...activity, id: activities.length.toString() }
-    setSelectedActivity(newActivity)
-    setActivities([...activities, newActivity]) 
+
+  const handleFormClose = () => {
+    setEditMode(false)
   }
-  setEditMode(false);
-}
 
-const handleDeleteActivity = (id: string) =>{
-  setActivities(activities.filter(act => act.id !== id));
-  setSelectedActivity(undefined);
-}
+  const handleSubmitForm = (activity: Activity) => {
+    if (activity.id) {
+      setActivities(
+        activities.map((act) => (act.id === activity.id ? activity : act)),
+      )
+    } else {
+      const newActivity = { ...activity, id: activities.length.toString() }
+      setSelectedActivity(newActivity)
+      setActivities([...activities, newActivity])
+    }
+    setEditMode(false)
+  }
 
-
+  const handleDeleteActivity = (id: string) => {
+    setActivities(activities.filter((act) => act.id !== id))
+    if (selectedActivity && selectedActivity?.id === id)
+      setSelectedActivity(undefined)
+    //setSelectedActivity(undefined);
+  }
 
   return (
-    <Box sx={{bgcolor: "#f9e8ff" }}>
+    <Box sx={{ bgcolor: '#f9e8ff' }}>
       <CssBaseline />
       <NavBar openForm={handleOpenForm} />
-      <Container maxWidth="xl" sx={{marginTop: 2}}>
-        <ActivityDashboard 
-          activities={activities} 
+      <Container maxWidth="xl" sx={{ marginTop: 2 }}>
+        <ActivityDashboard
+          activities={activities}
           selectActivity={handleSelectActivity}
           cancelSelectActivity={handleCancelSelectActivity}
           selectedActivity={selectedActivity}
           editMode={editMode}
           openForm={handleOpenForm}
-          closeForm={handleFormClose} 
-          submitForm={handleSubmitForm} 
-          deleteActivity={handleDeleteActivity} />
+          closeForm={handleFormClose}
+          submitForm={handleSubmitForm}
+          deleteActivity={handleDeleteActivity}
+        />
       </Container>
     </Box>
   )

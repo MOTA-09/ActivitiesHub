@@ -57,7 +57,7 @@ Clean-Architecture-flavored layering, but `EventsHub.Application` is currently a
 - **EventsHub.Persistence** — `AppDbContext` (SQLite via `UseSqlite`), EF Core `Migrations/`, and `DbInitializer.SeedDataAsync` (idempotent — no-ops if `Events` table is non-empty; seeds 10 Mexican-venue events spanning past/future dates).
 - **EventsHub.Api** — ASP.NET Core Web API, controllers only. `Program.cs` runs `Database.MigrateAsync()` + `DbInitializer.SeedDataAsync` on every startup (wrapped in try/catch, logged, never rethrown — a DB error is silently logged and the app still starts serving with whatever schema exists). CORS is locked to `localhost:3000` (the Vite dev server) via `AllowAnyHeader().AllowAnyMethod().WithOrigins(...)`.
   - All controllers derive from `EventsHubBaseController` (`[Route("api/v1/[controller]")]`, `[ApiController]`), including `WeatherForecastController` — so routes are `api/v1/Events`, `api/v1/WeatherForecast`, etc. New controllers should follow the same base-class pattern rather than declaring their own route/attributes.
-- **EventsHub.OpenApi** — a *separate*, standalone host (own `Program.cs`, own launch profile on port 5011) whose only job is to load the Api project's controllers as an MVC "application part" via reflection and serve the NSwag-generated OpenAPI document/UI. It is not part of the runtime request path of the real API — only used to (re)generate `src/openapi/EventsHub.v1.json` and the typed client. Note: it references `typeof(WeatherForecastController)` to get the Api assembly handle, since `Program` there is an internal top-level type.
+- **EventsHub.OpenApi** — a _separate_, standalone host (own `Program.cs`, own launch profile on port 5011) whose only job is to load the Api project's controllers as an MVC "application part" via reflection and serve the NSwag-generated OpenAPI document/UI. It is not part of the runtime request path of the real API — only used to (re)generate `src/openapi/EventsHub.v1.json` and the typed client. Note: it references `typeof(WeatherForecastController)` to get the Api assembly handle, since `Program` there is an internal top-level type.
 - **Generated, never hand-edit**: `src/openapi/EventsHub.v1.json`, `src/EventsHub.OpenApi/Generated/EventsHubRpcClient.generated.cs`, and everything under `src/EventsHub.Persistence/Migrations/` (regenerate via `dotnet ef migrations add`, don't hand-edit migration files).
 
 ### Frontend (`web/`)
@@ -71,5 +71,6 @@ Unit tests (`tests/EventsHub.UnitTests`) use NUnit, target the Api project's con
 ## Reference docs
 
 `docs/` contains course-material write-ups worth checking before assuming context:
+
 - `BackendBuildSteps.md` — full commit-by-commit reconstruction of how `src/` was built, including exact commands used for scaffolding, EF migrations, and the OpenAPI/NSwag pipeline.
 - `DbContextFundamentals.md`, `OpenApiSetup.md`, `SoftwareTestingFundamentals.md`, `GitInPracticeGuide.md` — supporting concept docs for this project's stack choices.
