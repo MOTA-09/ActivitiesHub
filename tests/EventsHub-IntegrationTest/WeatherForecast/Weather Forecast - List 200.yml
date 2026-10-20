@@ -13,7 +13,7 @@ runtime:
     - type: tests
       code: |-
         test("Status code is 200 OK", function(){
-          expect(res.getStatus()).to.equal.(200);
+          expect(res.getStatus()).to.equal(200);
         });
 
         test("Response returns an array", function(){
@@ -35,3 +35,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

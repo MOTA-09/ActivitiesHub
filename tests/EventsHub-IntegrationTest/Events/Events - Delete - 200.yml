@@ -1,0 +1,28 @@
+info:
+  name: Events - Delete - 200
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/events/:eventid"
+  params:
+    - name: eventid
+      value: ""
+      type: path
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status code is 200 OK", function(){
+          expect(res.getStatus()).to.equals(200);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true
