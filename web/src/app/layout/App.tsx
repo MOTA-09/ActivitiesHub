@@ -1,7 +1,7 @@
 import { Box, Container, CssBaseline } from '@mui/material'
 import './styles.css'
 import NavBar from './NavBar'
-import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard'
+import { Outlet } from 'react-router'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <CssBaseline />
       <NavBar />
       <Container maxWidth="xl" sx={{ marginTop: 2 }}>
-        <ActivityDashboard />
+        <Outlet />
       </Container>
     </Box>
   )
