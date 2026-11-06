@@ -34,7 +34,7 @@ export default function ActivityForm() {
   if (isLoadingActivity) return <Typography>Loading...</Typography>
 
   return (
-    <Paper sx={{ borderRadius: 3, padding: 3 }}>
+    <Paper sx={{ borderRadius: 3, padding: 3, maxWidth: 750, mx: 'auto' }}>
       <Typography variant="h5" gutterBottom color="primary">
         {activity ? 'Manage activity' : 'Create activity'}
       </Typography>
