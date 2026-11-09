@@ -1,6 +1,7 @@
 import { Box, Button, Paper, TextField, Typography } from '@mui/material'
 import { useActivities } from '../../../lib/hooks/useActivities'
 import { useNavigate, useParams } from 'react-router'
+import { FallingLeaves } from 'falling-leaves/react'
 
 export default function ActivityForm() {
   const { id } = useParams()
@@ -35,6 +36,7 @@ export default function ActivityForm() {
 
   return (
     <Paper sx={{ borderRadius: 3, padding: 3, maxWidth: 750, mx: 'auto' }}>
+      <FallingLeaves fullScreen shapes={['maple']} />
       <Typography variant="h5" gutterBottom color="primary">
         {activity ? 'Manage activity' : 'Create activity'}
       </Typography>
