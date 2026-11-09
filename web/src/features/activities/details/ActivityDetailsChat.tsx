@@ -14,7 +14,7 @@ export default function ActivityDetailsChat() {
       <Box
         sx={{
           textAlign: 'center',
-          bgcolor: 'primary.main',
+          backgroundImage: 'linear-gradient(to right, #570abc, #923dbc)',
           color: 'white',
           padding: 2,
           maxWidth: 650,

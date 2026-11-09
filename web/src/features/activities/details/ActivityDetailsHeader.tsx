@@ -29,12 +29,34 @@ export default function ActivityDetailsHeader({ activity }: Props) {
           badgeContent="Cancelled"
         />
       )}
-      <CardMedia
-        component="img"
-        height="300"
-        image={`/images/categoryImages/${activity.category}.jpg`}
-        alt={`${activity.category} image`}
-      />
+      <Box
+        sx={{
+          position: 'relative',
+          height: 300,
+          overflow: 'hidden',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: -20,
+            backgroundImage: `url(/images/categoryImages/${activity.category}.jpg)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'blur(20px)',
+            transform: 'scale(1.1)',
+          },
+        }}
+      >
+        <CardMedia
+          component="img"
+          image={`/images/categoryImages/${activity.category}.jpg`}
+          alt={`${activity.category} image`}
+          sx={{
+            position: 'relative',
+            height: '100%',
+            objectFit: 'contain',
+          }}
+        />
+      </Box>
       <Box
         sx={{
           position: 'absolute',
@@ -81,10 +103,13 @@ export default function ActivityDetailsHeader({ activity }: Props) {
               </Button>
               <Button
                 variant="contained"
-                color="primary"
                 component={Link}
                 to={`/manage/activityId`}
                 disabled={isCancelled}
+                sx={{
+                  backgroundColor: '#570abc',
+                  '&:hover': { backgroundColor: '#923dbc' },
+                }}
               >
                 Manage Event
               </Button>
@@ -92,7 +117,11 @@ export default function ActivityDetailsHeader({ activity }: Props) {
           ) : (
             <Button
               variant="contained"
-              color={isGoing ? 'primary' : 'info'}
+              sx={{
+                backgroundColor: isGoing ? '#570abc' : undefined,
+                '&:hover': isGoing ? { backgroundColor: '#923dbc' } : undefined,
+              }}
+              color={isGoing ? undefined : 'info'}
               onClick={() => {}}
               disabled={isCancelled || loading}
             >

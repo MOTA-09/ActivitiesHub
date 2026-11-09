@@ -19,7 +19,7 @@ export default function ActivityDetailsSidebar() {
         sx={{
           textAlign: 'center',
           border: 'none',
-          backgroundColor: 'primary.main',
+          backgroundImage: 'linear-gradient(to right, #570abc, #923dbc)',
           color: 'white',
           p: 2,
         }}

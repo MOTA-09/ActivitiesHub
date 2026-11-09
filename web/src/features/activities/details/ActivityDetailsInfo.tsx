@@ -10,7 +10,7 @@ export default function ActivityDetailsInfo({ activity }: Props) {
     <Paper sx={{ maxWidth: 650, mx: 'auto', mb: 2 }}>
       <Grid container sx={{ alignItems: 'center', pl: 2, py: 1 }}>
         <Grid size={1}>
-          <Info color="info" fontSize="large" />
+          <Info sx={{ color: '#570abc' }} fontSize="large" />
         </Grid>
         <Grid size={11}>
           <Typography>{activity.description}</Typography>
@@ -19,7 +19,7 @@ export default function ActivityDetailsInfo({ activity }: Props) {
       <Divider />
       <Grid container sx={{ alignItems: 'center', pl: 2, py: 1 }}>
         <Grid size={1}>
-          <CalendarToday color="info" fontSize="large" />
+          <CalendarToday sx={{ color: '#570abc' }} fontSize="large" />
         </Grid>
         <Grid size={11}>
           <Typography>{activity.date}</Typography>
@@ -29,7 +29,7 @@ export default function ActivityDetailsInfo({ activity }: Props) {
 
       <Grid container sx={{ alignItems: 'center', pl: 2, py: 1 }}>
         <Grid size={1}>
-          <Place color="info" fontSize="large" />
+          <Place sx={{ color: '#570abc' }} fontSize="large" />
         </Grid>
         <Grid size={11}>
           <Typography>
