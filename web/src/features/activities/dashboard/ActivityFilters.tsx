@@ -7,12 +7,20 @@ import {
   Paper,
   Typography,
 } from '@mui/material'
+import 'react-calendar/dist/Calendar.css'
 import Calendar from 'react-calendar'
 
 export default function ActivityFilters() {
   return (
     <Box
-      sx={{ display: 'flex', flexDirection: 'column', gap: 3, borderRadius: 3 }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 3,
+        borderRadius: 3,
+        mr: 6,
+        ml: -4,
+      }}
     >
       <Paper sx={{ p: 3, borderRadius: 3 }}>
         <Box sx={{ width: '100%' }}>

@@ -26,7 +26,7 @@ export default function ActivityCard({ activity }: Props) {
   const color = isHost ? 'secondary' : isGoing ? 'warning' : 'default'
 
   return (
-    <Card elevation={3} sx={{ borderRadius: 3 }}>
+    <Card elevation={3} sx={{ borderRadius: 3, mr: 6, ml: 8 }}>
       <Box
         sx={{
           display: 'flex',
