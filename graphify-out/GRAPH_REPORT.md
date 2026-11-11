@@ -1,27 +1,27 @@
-# Graph Report - ActivitiesHub  (2026-11-12)
+# Graph Report - ActivitiesHub  (2026-11-17)
 
 ## Corpus Check
-- 122 files · ~129,092 words
+- 129 files · ~130,433 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 15 file(s) not represented in the graph (top: (none) 13, .nswag 1, .css 1)
+- Unclassified: 17 file(s) not represented in the graph (top: (none) 13, .scss 2, .nswag 1)
 
 ## Summary
-- 646 nodes · 864 edges · 66 communities (26 shown, 40 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 19 edges (avg confidence: 0.84)
+- 716 nodes · 1009 edges · 74 communities (33 shown, 41 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 37 edges (avg confidence: 0.84)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `59e895e8`
+- Built from commit: `c87d5a7b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - package.json
 - Event
-- EventsHub.UnitTests.csproj
+- EventsHub.Api.UnitTests.csproj
 - EventsHub.Persistence
 - EventsControllerTests
-- 20260902035943_InitialCreate.Designer.cs
+- AppDbContextModelSnapshot
 - @mui/material
 - dependencies
 - compilerOptions
@@ -31,7 +31,7 @@
 - Graphify Knowledge Graph Pipeline
 - https
 - EventsHub.OpenApi
-- Part 2: .NET only (Husky.Net)
+- Part 1: .NET + npm in the same repo (e.g. EventsHub)
 - WeatherForecast
 - .agents/skills/openspec-explore/SKILL.md
 - .claude/skills/openspec-explore/SKILL.md
@@ -56,73 +56,81 @@
 - task-runner.json
 - commit-msg
 - pre-commit
-- Part 1: .NET + npm in the same repo (e.g. EventsHub)
+- HandlerTestBase
 - Part 3: npm only, `package.json` in the repo root (Husky v9)
 - web_src_index
 - TypeMap
 - Mapper
 - system_runtime_compilerservices
+- GlobalTestSetup
+- EventsHubBaseController
+- eslint.config.js
+- main.tsx
+- vite.config.ts
+- scripts
+- lint-staged
+- automapper
 
 ## God Nodes (most connected - your core abstractions)
-1. `Event` - 26 edges
+1. `Event` - 29 edges
 2. `TypeMap` - 24 edges
-3. `compilerOptions` - 18 edges
-4. `@mui/material` - 15 edges
-5. `compilerOptions` - 15 edges
-6. `AppDbContext` - 14 edges
-7. `Part 1: .NET + npm in the same repo (e.g. EventsHub)` - 14 edges
-8. `Part 2: .NET only (Husky.Net)` - 14 edges
-9. `Part 3: npm only, `package.json` in the repo root (Husky v9)` - 14 edges
-10. `EventsControllerTests` - 13 edges
+3. `EventsControllerTests` - 18 edges
+4. `compilerOptions` - 18 edges
+5. `AppDbContext` - 15 edges
+6. `@mui/material` - 15 edges
+7. `compilerOptions` - 15 edges
+8. `Part 1: .NET + npm in the same repo (e.g. EventsHub)` - 14 edges
+9. `Part 2: .NET only (Husky.Net)` - 14 edges
+10. `Part 3: npm only, `package.json` in the repo root (Husky v9)` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `EventsHub API` --semantically_similar_to--> `Get Event HTTP Request`  [INFERRED] [semantically similar]
   src/EventsHub.Api/README.md → tests/EventsHub-IntegrationTest/Events/Events - Get - 200.yml
 - `EventsHub API` --semantically_similar_to--> `Weather Forecast HTTP Request`  [INFERRED] [semantically similar]
   src/EventsHub.Api/README.md → tests/EventsHub-IntegrationTest/WeatherForecast/Weather Forecast - List 200.yml
+- `EditEventTests` --references--> `IMapper`  [EXTRACTED]
+  tests/EventsHub.Application.UnitTests/Events/EditEventTests.cs → src/EventsHub.Application/Core/Mapping/IMapper.cs
 - `EventsControllerTests` --references--> `AppDbContext`  [EXTRACTED]
   tests/EventsHub.Api.UnitTests/Controllers/EventsControllerTests.cs → src/EventsHub.Persistence/AppDbContext.cs
 - `GlobalTestSetup` --references--> `AppDbContext`  [EXTRACTED]
   tests/EventsHub.Api.UnitTests/GlobalTestSetup.cs → src/EventsHub.Persistence/AppDbContext.cs
-- `EventsHub Developer Guide` --references--> `EventsHub System Architecture`  [EXTRACTED]
-  CLAUDE.md → docs/Architecture.md
 
 ## Import Cycles
 - None detected.
 
-## Communities (66 total, 40 thin omitted)
+## Communities (74 total, 41 thin omitted)
 
 ### Community 0 - "package.json"
-Cohesion: 0.05
-Nodes (43): axios, @babel/core, babel-plugin-react-compiler, @emotion/react, @emotion/styled, eslint, eslint-config-prettier, @eslint/js (+35 more)
+Cohesion: 0.11
+Nodes (17): @babel/core, babel-plugin-react-compiler, date-fns, @emotion/react, @emotion/styled, lint-staged, prettier, sass-embedded (+9 more)
 
 ### Community 1 - "Event"
 Cohesion: 0.05
-Nodes (51): Command, DbContext, DbContextOptions, DbSet, ILogger, IRequest, IRequestHandler, Query (+43 more)
+Nodes (50): Command, DbContext, DbContextOptions, DbSet, ILogger, IRequest, IRequestHandler, Query (+42 more)
 
-### Community 2 - "EventsHub.UnitTests.csproj"
-Cohesion: 0.07
-Nodes (26): AutoMapper (13.0.1), coverlet.collector (6.0.4), MediatR (14.2.0), Microsoft.AspNetCore.Mvc.NewtonsoftJson (10.0.11), Microsoft.AspNetCore.OpenApi (10.0.11), Microsoft.EntityFrameworkCore.Design (10.0.11), Microsoft.EntityFrameworkCore.Sqlite (10.0.11), Microsoft.NET.Test.Sdk (17.14.0) (+18 more)
+### Community 2 - "EventsHub.Api.UnitTests.csproj"
+Cohesion: 0.06
+Nodes (33): AutoMapper (13.0.1), MediatR (14.2.0), Microsoft.AspNetCore.Mvc.NewtonsoftJson (10.0.11), Microsoft.AspNetCore.OpenApi (10.0.11), Microsoft.EntityFrameworkCore.Design (10.0.11), Microsoft.EntityFrameworkCore.Sqlite (10.0.11), Moq (4.20.72), Newtonsoft.Json (13.0.4) (+25 more)
 
 ### Community 3 - "EventsHub.Persistence"
 Cohesion: 0.06
-Nodes (33): automapper, ControllerBase, EventsHub.Domain, EventsHub.Application.Events.Queries, EventsHub.Api.Controllers, EventsHub.UnitTests, EventsHub.Persistence, EventsHub.Application.Events.Comands (+25 more)
+Nodes (33): EventsHub.Domain, EventsHub.Application.Core.Mapping, EventsHub.Persistence.Migrations, EventsHub.Application.UnitTests.Events, EventsHub.Application.Events.Queries, EventsHub.Api.UnitTests.Controllers, EventsHub.Api.Controllers, EventsHub.Persistence (+25 more)
 
 ### Community 4 - "EventsControllerTests"
-Cohesion: 0.13
-Nodes (18): ActionResult, Exception, HttpDelete, HttpPost, HttpPut, ProducesResponseType, ServiceProvider, CancellationToken (+10 more)
-
-### Community 5 - "20260902035943_InitialCreate.Designer.cs"
 Cohesion: 0.12
-Nodes (15): EventsHub.Persistence.Migrations, microsoft_entityframeworkcore_infrastructure, microsoft_entityframeworkcore_migrations, microsoft_entityframeworkcore_storage_valueconversion, Migration, MigrationBuilder, ModelSnapshot, DateTime (+7 more)
+Nodes (20): ActionResult, HttpDelete, HttpPost, HttpPut, NoContentResult, OkResult, ProducesResponseType, ServiceProvider (+12 more)
+
+### Community 5 - "AppDbContextModelSnapshot"
+Cohesion: 0.40
+Nodes (4): ModelSnapshot, DateTime, ModelBuilder, AppDbContextModelSnapshot
 
 ### Community 6 - "@mui/material"
-Cohesion: 0.12
-Nodes (26): date-fns, falling-leaves, @mui/icons-material, @mui/material, react, react-calendar, react-router, App() (+18 more)
+Cohesion: 0.11
+Nodes (28): axios, falling-leaves, @mui/icons-material, @mui/material, react-calendar, react-router, @tanstack/react-query, App() (+20 more)
 
 ### Community 7 - "dependencies"
-Cohesion: 0.13
-Nodes (15): dependencies, axios, date-fns, @emotion/react, @emotion/styled, falling-leaves, @fontsource/roboto, @mui/icons-material (+7 more)
+Cohesion: 0.12
+Nodes (16): dependencies, axios, date-fns, @emotion/react, @emotion/styled, falling-leaves, @fontsource/roboto, @mui/icons-material (+8 more)
 
 ### Community 8 - "compilerOptions"
 Cohesion: 0.10
@@ -152,9 +160,9 @@ Nodes (9): ASPNETCORE_ENVIRONMENT, applicationUrl, commandName, dotnetRunMessage
 Cohesion: 0.22
 Nodes (8): ASPNETCORE_ENVIRONMENT, applicationUrl, commandName, environmentVariables, launchBrowser, profiles, EventsHub.OpenApi, $schema
 
-### Community 15 - "Part 2: .NET only (Husky.Net)"
-Cohesion: 0.06
-Nodes (31): How to use this guide, Installing Husky in a Project: .NET and npm, Optional: add Prettier (code formatting), Part 2: .NET only (Husky.Net), Part 4: npm only, `package.json` in a subfolder (Husky v9), Skipping hooks (use sparingly), Skipping hooks (use sparingly), Step 10: Commit the Husky files (+23 more)
+### Community 15 - "Part 1: .NET + npm in the same repo (e.g. EventsHub)"
+Cohesion: 0.04
+Nodes (46): How to use this guide, Installing Husky in a Project: .NET and npm, Optional: add Prettier (code formatting), Optional: add Prettier (code formatting), Part 1: .NET + npm in the same repo (e.g. EventsHub), Part 2: .NET only (Husky.Net), Part 4: npm only, `package.json` in a subfolder (Husky v9), Skipping hooks (use sparingly) (+38 more)
 
 ### Community 16 - "WeatherForecast"
 Cohesion: 0.25
@@ -180,9 +188,9 @@ Nodes (10): Check for context, Ending Discovery, Guardrails, OpenSpec Awareness,
 Cohesion: 0.18
 Nodes (10): Check for context, Ending Discovery, Guardrails, OpenSpec Awareness, Planning a Change, The Stance, What You Don't Have To Do, What You Might Do (+2 more)
 
-### Community 42 - "Part 1: .NET + npm in the same repo (e.g. EventsHub)"
-Cohesion: 0.13
-Nodes (15): Optional: add Prettier (code formatting), Part 1: .NET + npm in the same repo (e.g. EventsHub), Skipping hooks (use sparingly), Step 10: Commit the Husky files, Step 11: Setup for a new teammate or CI, Step 1: Check prerequisites, Step 2: Install Husky.Net as a local tool, Step 3: Install the Git hooks (+7 more)
+### Community 42 - "HandlerTestBase"
+Cohesion: 0.08
+Nodes (26): DbUpdateException, OperationCanceledException, SqliteConnection, Task, Test, CreateEventTests, Exception, Task (+18 more)
 
 ### Community 43 - "Part 3: npm only, `package.json` in the repo root (Husky v9)"
 Cohesion: 0.13
@@ -194,27 +202,55 @@ Nodes (22): IReadOnlyDictionary, LambdaExpression, MethodInfo, PropertyInfo, Act
 
 ### Community 64 - "Mapper"
 Cohesion: 0.09
-Nodes (19): Assembly, EventsHub.Application.Core.Mapping, Handler, IServiceCollection, microsoft_extensions_dependencyinjection, SetUp, IMapper, Dictionary (+11 more)
+Nodes (18): Assembly, Handler, IServiceCollection, IMapper, Dictionary, Type, Mapper, Type (+10 more)
+
+### Community 66 - "GlobalTestSetup"
+Cohesion: 0.22
+Nodes (7): OneTimeSetUp, OneTimeTearDown, Task, DbInitializer, Task, GlobalTestSetup, AppDbContext
+
+### Community 67 - "EventsHubBaseController"
+Cohesion: 0.22
+Nodes (8): ControllerBase, IMediator, EventsHubBaseController, Mediator, HttpGet, IEnumerable, WeatherForecastController, WeatherForecast
+
+### Community 68 - "eslint.config.js"
+Cohesion: 0.25
+Nodes (7): eslint, eslint-config-prettier, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, typescript-eslint
+
+### Community 69 - "main.tsx"
+Cohesion: 0.25
+Nodes (7): @fontsource/roboto, react, react-dom, @tanstack/react-query-devtools, web_src_app_layout_styles, router, queryClient
+
+### Community 70 - "vite.config.ts"
+Cohesion: 0.40
+Nodes (4): @rolldown/plugin-babel, vite, vite-plugin-mkcert, @vitejs/plugin-react
+
+### Community 71 - "scripts"
+Cohesion: 0.40
+Nodes (5): scripts, build, dev, lint, preview
+
+### Community 72 - "lint-staged"
+Cohesion: 0.67
+Nodes (3): lint-staged, *.{json,md,css}, *.{ts,tsx}
 
 ## Knowledge Gaps
-- **291 isolated node(s):** `$schema`, `tasks`, `Mediator`, `net10.0`, `Microsoft.AspNetCore.OpenApi (10.0.11)` (+286 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 380 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **40 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **301 isolated node(s):** `$schema`, `tasks`, `Mediator`, `net10.0`, `Microsoft.AspNetCore.OpenApi (10.0.11)` (+296 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 404 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **41 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `EventsControllerTests` connect `EventsControllerTests` to `Mapper`, `Event`, `EventsHub.Persistence`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
-- **Why does `AppDbContext` connect `Event` to `EventsHub.Persistence`, `EventsControllerTests`?**
-  _High betweenness centrality (0.032) - this node is a cross-community bridge._
-- **Why does `TypeMap` connect `TypeMap` to `Mapper`?**
-  _High betweenness centrality (0.028) - this node is a cross-community bridge._
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+- **Why does `AppDbContext` connect `Event` to `GlobalTestSetup`, `EventsHub.Persistence`, `EventsControllerTests`, `HandlerTestBase`?**
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+- **Why does `Event` connect `Event` to `HandlerTestBase`, `EventsControllerTests`?**
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
 - **What connects `$schema`, `tasks`, `Mediator` to the rest of the system?**
-  _291 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _301 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.05142857142857143 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
 - **Should `Event` be split into smaller, more focused modules?**
-  _Cohesion score 0.0512987012987013 - nodes in this community are weakly interconnected._
-- **Should `EventsHub.UnitTests.csproj` be split into smaller, more focused modules?**
-  _Cohesion score 0.07386363636363637 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0531986531986532 - nodes in this community are weakly interconnected._
+- **Should `EventsHub.Api.UnitTests.csproj` be split into smaller, more focused modules?**
+  _Cohesion score 0.06219512195121951 - nodes in this community are weakly interconnected._

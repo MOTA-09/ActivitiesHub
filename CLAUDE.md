@@ -13,9 +13,10 @@ EventsHub is a school project (ICI 2026 01): a .NET 10 backend (Clean Architectu
 ```powershell
 dotnet build EventsHub.slnx                 # build everything
 dotnet run --project src/EventsHub.Api      # run the API (https://localhost:5001)
-dotnet test tests/EventsHub.UnitTests       # run all unit tests
-dotnet test tests/EventsHub.UnitTests --filter "FullyQualifiedName~EventsControllerTests"  # single fixture
-dotnet test tests/EventsHub.UnitTests --filter "Name=GetEventDetailAsync_WhenEventDoesntExist_ReturnsNotFound"  # single test
+dotnet test tests/EventsHub.Application.UnitTests  # handler tests (isolated in-memory SQLite, no HTTP)
+dotnet test tests/EventsHub.Api.UnitTests       # controller tests — currently does NOT compile (EventsControllerTests still calls new EventsController(AppDbContext))
+dotnet test tests/EventsHub.Api.UnitTests --filter "FullyQualifiedName~EventsControllerTests"  # single fixture
+dotnet test tests/EventsHub.Api.UnitTests --filter "Name=GetEventDetailAsync_WhenEventDoesntExist_ThrowsActivityNotFound"  # single test
 ```
 
 EF Core migrations (project = Persistence, startup = Api):
@@ -66,7 +67,7 @@ Vite + React 19 + MUI 9 + axios, TypeScript. Very early state — `App.tsx` fetc
 
 ### Testing conventions
 
-Unit tests (`tests/EventsHub.UnitTests`) use NUnit, target the Api project's controllers directly (no `WebApplicationFactory`/HTTP layer), and share one SQLite `AppDbContext` seeded once per test run via `[SetUpFixture] GlobalTestSetup` (`OneTimeSetUp`/`OneTimeTearDown`), not per-test. Because the DB and seed data are shared across the whole fixture run, tests read existing seeded rows (e.g. `Events.FirstAsync()`) rather than asserting on hardcoded fixture data — keep new tests in that style so they don't depend on ordering or count assumptions that seeding could invalidate.
+Unit tests (`tests/EventsHub.Api.UnitTests`) use NUnit, target the Api project's controllers directly (no `WebApplicationFactory`/HTTP layer), and share one SQLite `AppDbContext` seeded once per test run via `[SetUpFixture] GlobalTestSetup` (`OneTimeSetUp`/`OneTimeTearDown`), not per-test. Because the DB and seed data are shared across the whole fixture run, tests read existing seeded rows (e.g. `Events.FirstAsync()`) rather than asserting on hardcoded fixture data — keep new tests in that style so they don't depend on ordering or count assumptions that seeding could invalidate.
 
 ## Reference docs
 
@@ -74,3 +75,14 @@ Unit tests (`tests/EventsHub.UnitTests`) use NUnit, target the Api project's con
 
 - `BackendBuildSteps.md` — full commit-by-commit reconstruction of how `src/` was built, including exact commands used for scaffolding, EF migrations, and the OpenAPI/NSwag pipeline.
 - `DbContextFundamentals.md`, `OpenApiSetup.md`, `SoftwareTestingFundamentals.md`, `GitInPracticeGuide.md` — supporting concept docs for this project's stack choices.
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+Rules:
+
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).

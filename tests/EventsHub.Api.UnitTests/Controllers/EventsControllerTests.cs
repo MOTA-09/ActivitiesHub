@@ -9,15 +9,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EventsHub.UnitTests.Controllers;
+namespace EventsHub.Api.UnitTests.Controllers;
 
 [TestFixture]
 public class EventsControllerTests
 {
-    private EventsController _eventsController = null!;
     private ServiceProvider _serviceProvider = null!;
+    private EventsController _eventsController = null!;
 
-    private readonly List<string> _ownendEventIds = [];
+    // Events created by these tests. They are removed in TearDown so the shared seeded rows stay untouched.
+    private readonly List<string> _ownedEventIds = [];
 
     private static AppDbContext Db => GlobalTestSetup.AppDbContext;
 
@@ -31,7 +32,6 @@ public class EventsControllerTests
         services.AddLogging();
         _serviceProvider = services.BuildServiceProvider();
 
-
         _eventsController = new EventsController
         {
             ControllerContext = new ControllerContext
@@ -44,7 +44,7 @@ public class EventsControllerTests
     [TearDown]
     public async Task TearDown()
     {
-        foreach (var id in _ownendEventIds)
+        foreach (var id in _ownedEventIds)
         {
             var leftover = await Db.Events.FindAsync(id);
             if (leftover is not null)
@@ -53,15 +53,16 @@ public class EventsControllerTests
                 await Db.SaveChangesAsync();
             }
         }
-        _ownendEventIds.Clear();
+        _ownedEventIds.Clear();
+
         await _serviceProvider.DisposeAsync();
     }
 
     [Test]
-    public async Task GetEventsAsync_WhenEventsExist_ReturnsAllEvents_Async()
+    public async Task GetEventsAsync_WhenEventsExists_ReturnsAllEvents()
     {
         // Arrange
-        var expectedCount = await GlobalTestSetup.AppDbContext.Events.CountAsync();
+        var expectedCount = await Db.Events.CountAsync();
 
         // Act
         var result = await _eventsController.GetEventsAsync(CancellationToken.None);
@@ -69,12 +70,10 @@ public class EventsControllerTests
         // Assert
         Assert.That(result.Value, Is.Not.Null);
         Assert.That(result.Value, Has.Count.EqualTo(expectedCount));
-
     }
 
-
     [Test]
-    public async Task GetEventsAsync_WhenEventsExist_ReturnsMatchingEvents_Async()
+    public async Task GetEventDetailAsync_WhenEventExists_ReturnsMatchingEvent()
     {
         // Arrange
         var existing = await Db.Events.FirstAsync();
@@ -92,11 +91,10 @@ public class EventsControllerTests
             Assert.That(detail.Description, Is.EqualTo(existing.Description));
             Assert.That(detail.Date, Is.EqualTo(existing.Date));
         });
-
     }
 
     [Test]
-    public void GetEventDetailAsync_WhenEventDoesntExist_ThrowsEventNotFound_Async()
+    public void GetEventDetailAsync_WhenEventDoesntExist_ThrowsActivityNotFound()
     {
         // Arrange
         var nonExistentId = Guid.NewGuid().ToString();
@@ -104,35 +102,94 @@ public class EventsControllerTests
         // Act & Assert
         var ex = Assert.ThrowsAsync<Exception>(() => _eventsController.GetEventDetailAsync(nonExistentId));
         Assert.That(ex!.Message, Is.EqualTo("Activity was not found"));
-
     }
-
 
     [Test]
     public async Task CreateEventAsync_WhenEventIsValid_ReturnsIdAndPersistsEvent()
     {
         // Arrange
-        var newEvent = NewEvent("Controller create test");
-        _ownendEventIds.Add(newEvent.Id);
-        //Act
+        var newEvent = NewEvent(title: "Controller create test");
+        _ownedEventIds.Add(newEvent.Id);
+
+        // Act
         var result = await _eventsController.CreateEventAsync(newEvent);
+
         // Assert
         Assert.That(result.Value, Is.EqualTo(newEvent.Id));
         var stored = await Db.Events.AsNoTracking().FirstOrDefaultAsync(e => e.Id == newEvent.Id);
         Assert.That(stored, Is.Not.Null);
     }
 
+    [Test]
+    public async Task EditEventAsync_WhenEventExists_ReturnsNoContentAndUpdatesTitle()
+    {
+        // Arrange
+        var owned = await AddOwnedEventAsync("Before edit");
+        var edited = NewEvent(owned.Id, "After edit");
+
+        // Act
+        var result = await _eventsController.EditEventAsync(edited);
+
+        // Assert
+        Assert.That(result, Is.InstanceOf<NoContentResult>());
+        var stored = await Db.Events.AsNoTracking().FirstAsync(e => e.Id == owned.Id);
+        Assert.That(stored.Title, Is.EqualTo("After edit"));
+    }
+
+    [Test]
+    public void EditEventAsync_WhenEventDoesntExist_ThrowsEventNotFound()
+    {
+        // Arrange
+        var edited = NewEvent(Guid.NewGuid().ToString(), "Ghost");
+
+        // Act & Assert
+        var ex = Assert.ThrowsAsync<Exception>(() => _eventsController.EditEventAsync(edited));
+        Assert.That(ex!.Message, Is.EqualTo("Event not found"));
+    }
+
+    [Test]
+    public async Task DeleteEventAsync_WhenEventExists_ReturnsOkAndRemovesEvent()
+    {
+        // Arrange
+        var owned = await AddOwnedEventAsync("To delete");
+
+        // Act
+        var result = await _eventsController.DeleteEventAsync(owned.Id);
+
+        // Assert
+        Assert.That(result, Is.InstanceOf<OkResult>());
+        var remaining = await Db.Events.AsNoTracking().AnyAsync(e => e.Id == owned.Id);
+        Assert.That(remaining, Is.False);
+    }
+
+    [Test]
+    public void DeleteEventAsync_WhenEventDoesntExist_ThrowsEventNotFound()
+    {
+        // Arrange
+        var nonExistentId = Guid.NewGuid().ToString();
+
+        // Act & Assert
+        var ex = Assert.ThrowsAsync<Exception>(() => _eventsController.DeleteEventAsync(nonExistentId));
+        Assert.That(ex!.Message, Is.EqualTo("Event not found"));
+    }
+
+    private async Task<Event> AddOwnedEventAsync(string title)
+    {
+        var @event = NewEvent(title: title);
+        Db.Events.Add(@event);
+        await Db.SaveChangesAsync();
+        _ownedEventIds.Add(@event.Id);
+        return @event;
+    }
+
     private static Event NewEvent(string? id = null, string title = "Test event") => new()
     {
         Id = id ?? Guid.NewGuid().ToString(),
         Title = title,
-        Description = "Test event description",
-        Category = "Test music",
-        City = "Test city",
+        Description = "Test description",
+        Category = "music",
+        City = "Merida",
         Venue = "Test venue",
-        Date = DateTime.UtcNow.AddDays(7)
-
+        Date = DateTime.UtcNow.AddDays(7),
     };
-
 }
-

@@ -3,10 +3,6 @@
 The data-access layer: EF Core `DbContext`, migrations, and seed data.
 Depends only on `EventsHub.Domain`.
 
-## Connections
-
-Persistence references Domain for the `Event` entity. Api configures this project with the SQLite connection, applies its migrations, and seeds an empty database during startup. Controllers currently inject `AppDbContext` directly; the Application project does not mediate database access. See the [architecture overview](../../docs/Architecture.md#architectural-pattern).
-
 ## Contents
 
 - **`AppDbContext.cs`** — `DbSet<Event> Events`. Configured for SQLite
@@ -24,6 +20,17 @@ Persistence references Domain for the `Event` entity. Api configures this projec
   primary key, all other columns `NOT NULL`, `Date` stored as `TEXT`,
   `IsCancelled` as `INTEGER`). **Generated — never hand-edit.**
 
+## Who uses it
+
+- **`EventsHub.Application`** references this project; every MediatR handler
+  takes `AppDbContext` in its constructor and reads or writes `Events`
+  through it. There is no repository layer in between.
+- **`EventsHub.Api`** registers `AppDbContext` (`AddDbContext` +
+  `UseSqlite`) and runs `MigrateAsync()` + `SeedDataAsync` at startup. It
+  reaches this project through `EventsHub.Application`.
+- **`tests/EventsHub.Api.UnitTests`** references it directly and builds its own
+  `AppDbContext` in `GlobalTestSetup`.
+
 ## Working with migrations
 
 Run from the repo root, with `Persistence` as `-p` (the project containing
@@ -36,7 +43,7 @@ dotnet ef database update -p src/EventsHub.Persistence -s src/EventsHub.Api
 ```
 
 Both `EventsHub.Api` (on every startup) and
-`tests/EventsHub.UnitTests` (once, in `GlobalTestSetup`) call
+`tests/EventsHub.Api.UnitTests` (once, in `GlobalTestSetup`) call
 `context.Database.MigrateAsync()` themselves — you generally don't need to
 run `database update` manually against those; it's mainly useful for
 inspecting the schema directly.

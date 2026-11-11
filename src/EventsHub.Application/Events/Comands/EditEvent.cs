@@ -1,7 +1,7 @@
 using EventsHub.Persistence;
 using EventsHub.Domain;
 using MediatR;
-using AutoMapper;
+using EventsHub.Application.Core.Mapping;
 
 namespace EventsHub.Application.Events.Comands;
 
