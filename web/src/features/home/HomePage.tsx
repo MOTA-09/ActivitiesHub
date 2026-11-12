@@ -1,6 +1,7 @@
 import { Group } from '@mui/icons-material'
 import { Box, Button, Paper, Typography } from '@mui/material'
 import { useNavigate } from 'react-router'
+import styles from './HomePage.module.scss'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -34,23 +35,28 @@ export default function HomePage() {
         </Typography>
       </Box>
       <Typography variant="h2">Welcome</Typography>
-      <Button
-        onClick={() => navigate('/activities')}
-        size="large"
-        variant="contained"
-        sx={{
-          height: 80,
-          borderRadius: 4,
-          fontSize: '1.5rem',
-          display: 'flex',
-          justifySelf: 'self-end',
-          backgroundColor: '#332153',
-          color: 'white',
-          '&:hover': { backgroundColor: '#570abc' },
-        }}
+      <Box
+        className={styles.haloButton}
+        sx={{ display: 'inline-block', borderRadius: 1 }}
       >
-        Let's go!
-      </Button>
+        <Button
+          onClick={() => navigate('/activities')}
+          size="large"
+          variant="contained"
+          sx={{
+            height: 80,
+            borderRadius: 4,
+            fontSize: '1.5rem',
+            display: 'flex',
+            justifySelf: 'self-end',
+            backgroundColor: '#332153',
+            color: 'white',
+            '&:hover': { backgroundColor: '#570abc' },
+          }}
+        >
+          Let's go!
+        </Button>
+      </Box>
     </Paper>
   )
 }
