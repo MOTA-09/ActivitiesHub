@@ -5,11 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace EventsHub.Application.Events.Queries;
+
 public class GetEventList
 {
-    
-    public class Query : IRequest<List<Event>>{}
-    
+
+    public class Query : IRequest<List<Event>> { }
+
     public class Handler(AppDbContext context, ILogger<GetEventList> logger) : IRequestHandler<Query, List<Event>>
     {
         public async Task<List<Event>> Handle(Query request, CancellationToken cancellationToken)
@@ -23,11 +24,11 @@ public class GetEventList
                     logger.LogInformation($"Task {i} has completed!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 logger.LogInformation("Task was CANCELLED!.");
             }
             return await context.Events.ToListAsync(cancellationToken);
         }
-    }    
+    }
 }
