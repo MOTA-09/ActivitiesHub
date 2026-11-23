@@ -35,7 +35,16 @@ export default function ActivityForm() {
   if (isLoadingActivity) return <Typography>Loading...</Typography>
 
   return (
-    <Paper sx={{ borderRadius: 3, padding: 3, maxWidth: 750, mx: 'auto' }}>
+    <Paper
+      sx={{
+        position: 'relative',
+        isolation: 'isolate',
+        borderRadius: 3,
+        padding: 3,
+        maxWidth: 750,
+        mx: 'auto',
+      }}
+    >
       <FallingLeaves fullScreen shapes={['maple']} />
       <Typography variant="h5" gutterBottom color="primary">
         {activity ? 'Manage activity' : 'Create activity'}
