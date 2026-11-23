@@ -1,8 +1,12 @@
 import { Group } from '@mui/icons-material'
 import { Box, Button, Paper, Typography } from '@mui/material'
 import { useNavigate } from 'react-router'
+import SakuraBlossoms from '../../app/shared/components/SakuraBlossoms'
+import Snowflakes from '../../app/shared/components/Snowflakes'
 import styles from './HomePage.module.scss'
-import SakuraPetals from '../../app/shared/components/SakuraPetals'
+
+const decorations = { sakura: SakuraBlossoms, snow: Snowflakes }
+const HomeDecoration = decorations.snow
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -23,7 +27,7 @@ export default function HomePage() {
         backgroundImage: 'linear-gradient(to right, #570abc, #923dbc)',
       }}
     >
-      <SakuraPetals />
+      <HomeDecoration />
 
       <Box
         sx={{
