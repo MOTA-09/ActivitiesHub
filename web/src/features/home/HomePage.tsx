@@ -2,6 +2,7 @@ import { Group } from '@mui/icons-material'
 import { Box, Button, Paper, Typography } from '@mui/material'
 import { useNavigate } from 'react-router'
 import styles from './HomePage.module.scss'
+import SakuraPetals from '../../app/shared/components/SakuraPetals'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -9,6 +10,8 @@ export default function HomePage() {
   return (
     <Paper
       sx={{
+        position: 'relative',
+        isolation: 'isolate',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
@@ -20,6 +23,8 @@ export default function HomePage() {
         backgroundImage: 'linear-gradient(to right, #570abc, #923dbc)',
       }}
     >
+      <SakuraPetals />
+
       <Box
         sx={{
           display: 'flex',
